@@ -1,0 +1,6 @@
+.perf-bar {
+      height: 5px;
+      background: #330000;
+      border-radius: 4px;
+      overflow: hidden;
+}
