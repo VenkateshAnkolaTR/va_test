@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCB – IPL 2025 Champions 🏆</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Rajdhani:wght@500;700&display=swap');
+
+    :root {
+      --red:    #E1001A;
+      --dark:   #1a0000;
+      --gold:   #FFD700;
+      --card-bg:#1e0505;
+      --text:   #f5f5f5;
+      --muted:  #aaa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: radial-gradient(ellipse at top, #4a0000 0%, #1a0000 70%);
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23E1001A22'/%3E%3C/svg%3E") repeat;
+      animation: bgScroll 20s linear infinite;
+    }
+    @keyframes bgScroll { to { background-position: 60px 60px; } }
+
+    .trophy-ring {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 64px;
+      box-shadow: 0 0 40px var(--gold), 0 0 80px #E1001A88;
+      animation: pulse 2.5s ease-in-out infinite;
+      position: relative;
+      background: #1a0000;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 30px var(--gold), 0 0 60px #E1001A88; }
+      50%      { box-shadow: 0 0 60px var(--gold), 0 0 120px #E1001Acc; }
+    }
+
+    header h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-shadow: 0 0 20px #FFD70088;
+    }
+    header h1 span { color: var(--red); }
+
+    .tagline {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .champion-badge {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 8px 26px;
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: #1a0000;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      border-radius: 30px;
+      text-transform: uppercase;
+    }
+
+    /* ─── SEASON STATS BAR ──────────────────────────────── */
+    .season-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1px;
+      background: #330000;
+      border-top: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+    }
+    .season-stat {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 20px 14px;
+      background: #1e0505;
+      transition: background 0.3s;
+    }
+    .season-stat:hover { background: #2d0808; }
+    .season-stat .val {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .season-stat .lbl {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ─── SECTION TITLE ─────────────────────────────────── */
+    .section-title {
+      text-align: center;
+      padding: 48px 20px 24px;
+    }
+    .section-title h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .section-title h2 span { color: var(--red); }
+    .underline {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ─── FILTERS ────────────────────────────────────────── */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 20px 28px;
+    }
+    .filter-btn {
+      padding: 7px 20px;
+      border-radius: 20px;
+      border: 1px solid #555;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    /* ─── PLAYER GRID ───────────────────────────────────── */
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 22px;
+      padding: 0 28px 60px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ─── PLAYER CARD ───────────────────────────────────── */
+    .player-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid #330000;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .player-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px #E1001A44;
+      border-color: var(--red);
+    }
+
+    .card-header {
+      padding: 18px 18px 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid #2a0505;
+    }
+
+    .player-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+
+    .player-info h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .player-info .role {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .player-info .country {
+      font-size: 0.72rem;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    .jersey {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .bat  { background: #1a3a1a; color: #66cc66; }
+    .bowl { background: #1a1a3a; color: #6699ff; }
+    .ar   { background: #3a1a1a; color: #ff9966; }
+    .wk   { background: #2a2a1a; color: #ffcc44; }
+
+    /* Stats grid inside card */
+    .card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #2a0505;
+    }
+    .stat-cell {
+      background: var(--card-bg);
+      padding: 10px 14px;
+      text-align: center;
+    }
+    .stat-cell .s-val {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-cell .s-lbl {
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Performance bar */
+    .perf-bar-wrap {
+      padding: 10px 14px 14px;
+    }
+    .perf-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    .perf-bar {
+      height: 5px;
+      background: #330000;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .perf-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transition: width 1s ease;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #330000;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+    footer span { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ════════════════════════════════════════════ -->
+<header>
+  <div class="trophy-ring">🏆</div>
+  <h1><span>RCB</span> Champions</h1>
+  <p class="tagline">Royal Challengers Bengaluru</p>
+  <div class="champion-badge">IPL 2025 Champions</div>
+</header>
+
+<!-- ═══ SEASON SUMMARY BAR ══════════════════════════════ -->
+<div class="season-bar">
+  <div class="season-stat"><div class="val">14</div><div class="lbl">Matches Won</div></div>
+  <div class="season-stat"><div class="val">4</div><div class="lbl">Lost</div></div>
+  <div class="season-stat"><div class="val">741</div><div class="lbl">Kohli Runs</div></div>
+  <div class="season-stat"><div class="val">72.6%</div><div class="lbl">Win %</div></div>
+  <div class="season-stat"><div class="val">18</div><div class="lbl">Hazlewood Wkts</div></div>
+  <div class="season-stat"><div class="val">+0.624</div><div class="lbl">NRR</div></div>
+</div>
+
+<!-- ═══ BATTERS ══════════════════════════════════════════ -->
+<div class="section-title">
+  <h2>🏏 <span>Batters</span> & Top Scorers</h2>
+  <div class="underline"></div>
+</div>
+<div class="players-grid" id="batters">
+
+  <!-- Virat Kohli -->
+  <div class="player-card">
+    <div class="jersey">#18</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#1a2a0a;">🐐</div>
+      <div class="player-info">
+        <h3>Virat Kohli</h3>
+        <div class="role">Top-Order Batter</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge bat">Batter</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">741</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">52.9</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">149.6</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">3</div><div class="s-lbl">Fifties</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>95/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:95%"></div></div>
+    </div>
+  </div>
+
+  <!-- Rajat Patidar (Captain) -->
+  <div class="player-card">
+    <div class="jersey">#17 (C)</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#2a0a0a;">⚡</div>
+      <div class="player-info">
+        <h3>Rajat Patidar</h3>
+        <div class="role">Captain · Middle Order</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge bat">Batter</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">532</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">38.0</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">155.2</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">2</div><div class="s-lbl">Fifties</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>82/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:82%"></div></div>
+    </div>
+  </div>
+
+  <!-- Phil Salt -->
+  <div class="player-card">
+    <div class="jersey">#3</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#0a1a2a;">🧂</div>
+      <div class="player-info">
+        <h3>Phil Salt</h3>
+        <div class="role">Opener · Wicket-Keeper</div>
+        <div class="country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
+        <span class="role-badge wk">WK-Batter</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">445</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">37.1</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">162.3</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">14</div><div class="s-lbl">Sixes</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>79/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:79%"></div></div>
+    </div>
+  </div>
+
+  <!-- Tim David -->
+  <div class="player-card">
+    <div class="jersey">#8</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#1a0a2a;">💥</div>
+      <div class="player-info">
+        <h3>Tim David</h3>
+        <div class="role">Finisher · Power Hitter</div>
+        <div class="country">🇸🇬 Singapore</div>
+        <span class="role-badge bat">Batter</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">298</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">42.6</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">182.4</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">22</div><div class="s-lbl">Sixes</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>84/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:84%"></div></div>
+    </div>
+  </div>
+
+  <!-- Jitesh Sharma -->
+  <div class="player-card">
+    <div class="jersey">#14</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#2a1a0a;">🧤</div>
+      <div class="player-info">
+        <h3>Jitesh Sharma</h3>
+        <div class="role">Wicket-Keeper Batter</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge wk">WK-Batter</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">210</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">26.3</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">158.3</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">12</div><div class="s-lbl">Catches</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>68/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:68%"></div></div>
+    </div>
+  </div>
+
+  <!-- Jacob Bethell -->
+  <div class="player-card">
+    <div class="jersey">#51</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#0a2a2a;">🌟</div>
+      <div class="player-info">
+        <h3>Jacob Bethell</h3>
+        <div class="role">Young Gun · All-Rounder</div>
+        <div class="country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
+        <span class="role-badge ar">All-Rounder</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">189</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">23.6</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">145.4</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">4</div><div class="s-lbl">Wickets</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>64/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:64%"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ALL-ROUNDERS ═════════════════════════════════════ -->
+<div class="section-title">
+  <h2>⚡ <span>All-Rounders</span></h2>
+  <div class="underline"></div>
+</div>
+<div class="players-grid">
+
+  <!-- Liam Livingstone -->
+  <div class="player-card">
+    <div class="jersey">#23</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#1a1a2a;">🎯</div>
+      <div class="player-info">
+        <h3>Liam Livingstone</h3>
+        <div class="role">Hard-Hitting All-Rounder</div>
+        <div class="country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
+        <span class="role-badge ar">All-Rounder</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">380</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">170.2</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">8</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">8.4</div><div class="s-lbl">Economy</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>80/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:80%"></div></div>
+    </div>
+  </div>
+
+  <!-- Krunal Pandya -->
+  <div class="player-card">
+    <div class="jersey">#24</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#1a2a1a;">🔄</div>
+      <div class="player-info">
+        <h3>Krunal Pandya</h3>
+        <div class="role">Slow Left-Arm All-Rounder</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge ar">All-Rounder</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">148</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">130.1</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">12</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">7.9</div><div class="s-lbl">Economy</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>72/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:72%"></div></div>
+    </div>
+  </div>
+
+  <!-- Romario Shepherd -->
+  <div class="player-card">
+    <div class="jersey">#9</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#2a1a0a;">🌪️</div>
+      <div class="player-info">
+        <h3>Romario Shepherd</h3>
+        <div class="role">Fast-Bowling All-Rounder</div>
+        <div class="country">🇬🇾 West Indies</div>
+        <span class="role-badge ar">All-Rounder</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">112</div><div class="s-lbl">Runs</div></div>
+      <div class="stat-cell"><div class="s-val">165.4</div><div class="s-lbl">Strike Rate</div></div>
+      <div class="stat-cell"><div class="s-val">10</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">9.4</div><div class="s-lbl">Economy</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>70/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:70%"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ BOWLERS ══════════════════════════════════════════ -->
+<div class="section-title">
+  <h2>🎳 <span>Bowlers</span></h2>
+  <div class="underline"></div>
+</div>
+<div class="players-grid">
+
+  <!-- Josh Hazlewood -->
+  <div class="player-card">
+    <div class="jersey">#54</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#0a0a2a;">🚀</div>
+      <div class="player-info">
+        <h3>Josh Hazlewood</h3>
+        <div class="role">Lead Pacer · Death Specialist</div>
+        <div class="country">🇦🇺 Australia</div>
+        <span class="role-badge bowl">Bowler</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">18</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">21.3</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">7.8</div><div class="s-lbl">Economy</div></div>
+      <div class="stat-cell"><div class="s-val">16.3</div><div class="s-lbl">Strike Rate</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>90/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:90%"></div></div>
+    </div>
+  </div>
+
+  <!-- Bhuvneshwar Kumar -->
+  <div class="player-card">
+    <div class="jersey">#15</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#0a1a0a;">🎯</div>
+      <div class="player-info">
+        <h3>Bhuvneshwar Kumar</h3>
+        <div class="role">Swing Bowler · Powerplay</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge bowl">Bowler</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">15</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">24.5</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">8.2</div><div class="s-lbl">Economy</div></div>
+      <div class="stat-cell"><div class="s-val">17.9</div><div class="s-lbl">Strike Rate</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>78/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:78%"></div></div>
+    </div>
+  </div>
+
+  <!-- Nuwan Thushara -->
+  <div class="player-card">
+    <div class="jersey">#7</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#1a0a1a;">💨</div>
+      <div class="player-info">
+        <h3>Nuwan Thushara</h3>
+        <div class="role">Right-Arm Fast-Medium</div>
+        <div class="country">🇱🇰 Sri Lanka</div>
+        <span class="role-badge bowl">Bowler</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">16</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">22.1</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">8.5</div><div class="s-lbl">Economy</div></div>
+      <div class="stat-cell"><div class="s-val">15.6</div><div class="s-lbl">Strike Rate</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>81/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:81%"></div></div>
+    </div>
+  </div>
+
+  <!-- Yash Dayal -->
+  <div class="player-card">
+    <div class="jersey">#12</div>
+    <div class="card-header">
+      <div class="player-avatar" style="background:#0a2a1a;">🔥</div>
+      <div class="player-info">
+        <h3>Yash Dayal</h3>
+        <div class="role">Left-Arm Fast Medium</div>
+        <div class="country">🇮🇳 India</div>
+        <span class="role-badge bowl">Bowler</span>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat-cell"><div class="s-val">14</div><div class="s-lbl">Wickets</div></div>
+      <div class="stat-cell"><div class="s-val">25.8</div><div class="s-lbl">Average</div></div>
+      <div class="stat-cell"><div class="s-val">9.1</div><div class="s-lbl">Economy</div></div>
+      <div class="stat-cell"><div class="s-val">17.0</div><div class="s-lbl">Strike Rate</div></div>
+    </div>
+    <div class="perf-bar-wrap">
+      <div class="perf-label"><span>Season Rating</span><span>74/100</span></div>
+      <div class="perf-bar"><div class="perf-fill" style="width:74%"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════ -->
+<footer>
+  <p>🏏 <span>Royal Challengers Bengaluru</span> · IPL 2025 Champions 🏆</p>
+  <p style="margin-top:8px">Ee Sala Cup Namde! &nbsp;•&nbsp; Play Bold</p>
+</footer>
+
+</body>
+</html>
