@@ -1,0 +1,19 @@
+rcb-ipl-2025.html
+  s_9d54e3e0ebafa1::t_ae12d2ff37c946 1-699
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ef2b99847506fefc21e1b7cbca9fea94f1115fab",
+  "prompts": {},
+  "sessions": {
+    "s_9d54e3e0ebafa1": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "50541b39-d735-4a30-b703-ee5b5bce5185",
+        "model": "unknown"
+      },
+      "human_author": "Venkatesh <Venkatesh.Ankola@thomsonreuters.com>"
+    }
+  }
+}
