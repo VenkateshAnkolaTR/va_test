@@ -1,0 +1,19 @@
+add_two_numbers.py
+  s_593b5e1e2c2f1d::t_fce4683050f90b 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a5bbc20a85d15c31f90564752f16bc2a51cec685",
+  "prompts": {},
+  "sessions": {
+    "s_593b5e1e2c2f1d": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "ee9582d3-7e41-4bb8-bd5d-e7191c1f3913",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Venkatesh <Venkatesh.Ankola@thomsonreuters.com>"
+    }
+  }
+}
