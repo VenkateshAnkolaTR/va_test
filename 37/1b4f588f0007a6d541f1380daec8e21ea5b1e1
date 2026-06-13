@@ -1,0 +1,14 @@
+index.css
+  h_0cb0fbacb3a1cd 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "371b4f588f0007a6d541f1380daec8e21ea5b1e1",
+  "prompts": {},
+  "humans": {
+    "h_0cb0fbacb3a1cd": {
+      "author": "Venkatesh <Venkatesh.Ankola@thomsonreuters.com>"
+    }
+  }
+}
